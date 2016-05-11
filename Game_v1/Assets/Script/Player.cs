@@ -5,6 +5,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     public GameObject particalSystem;
+    public GameObject teleportEffect;
     public Animator anim;
     public Text[] scoreTexts;
     public LayerMask whatIsGround;
@@ -103,12 +104,14 @@ public class Player : MonoBehaviour {
         else if (collider.tag == "Slow")
         {
             collider.gameObject.SetActive(false);
-            speed = speed / 2f; 
+            speed = speed / 2f;
+            Instantiate(teleportEffect, transform.position, Quaternion.identity);
         }//speed up condition
         else if (collider.tag == "SpeedUp")
         {
             collider.gameObject.SetActive(false);
-            //speed = speed * 1.25f;
+            Instantiate(teleportEffect, transform.position, Quaternion.identity);
+            speed = speed + 0.5f;
         }
         else if (collider.tag == "RightTile")
         {
@@ -165,7 +168,7 @@ public class Player : MonoBehaviour {
     private bool IsGrounded()
     {
         //condition for notice if player is still on path
-        Collider[] colliders = Physics.OverlapSphere(contactPoint.position, 0.01f, whatIsGround);
+        Collider[] colliders = Physics.OverlapSphere(contactPoint.position, 0.05f, whatIsGround);
         //Vector3 halfExtents = new Vector3(0.2f, 0.25f);
         //Collider[] colliders = Physics.OverlapBox(contactPoint.position, halfExtents, Quaternion.identity, whatIsGround, QueryTriggerInteraction.UseGlobal);
         for (int i = 0; i < colliders.Length; i++)

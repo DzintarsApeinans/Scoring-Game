@@ -4,7 +4,6 @@ using System.Collections;
 public class Partical : MonoBehaviour {
 
     private ParticleSystem particalSystem, teleportEffect;
-    //private TeleportEffect teleportEffect;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +20,7 @@ public class Partical : MonoBehaviour {
 
         if (!teleportEffect.isPlaying)
         {
+            teleportEffect.loop = false;
             Destroy(gameObject);
         }
 	}
