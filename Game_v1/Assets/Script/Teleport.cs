@@ -6,6 +6,7 @@ public class Teleport : MonoBehaviour {
     public int code;
 
     private float disableTimer = 0f;
+    private Vector3 dir;
 
     void Update()
     {

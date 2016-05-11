@@ -7,6 +7,7 @@ public class TileManager : MonoBehaviour {
     public GameObject currentTile;
     public GameObject tile;
     public GameObject[] tilePrefabs;
+    public GameObject teleportEffect;
 
     private static TileManager instance;
     private Stack<GameObject> leftTiles = new Stack<GameObject>();
@@ -119,7 +120,9 @@ public class TileManager : MonoBehaviour {
         //add slowDown object if random generated number equal 0 of 50
         if (slowDown == 0)
         {
+            //Instantiate(teleportEffect, currentTile.transform.GetChild(2).position, Quaternion.identity);
             currentTile.transform.GetChild(2).gameObject.SetActive(true);
+            //Instantiate(teleportEffect, tile.transform.GetChild(2).position, Quaternion.identity);
             tile.transform.GetChild(2).gameObject.SetActive(true);
         }
 
@@ -127,7 +130,9 @@ public class TileManager : MonoBehaviour {
         //add speed up object if random generated number equal 0 of 25
         if (speedUp == 0)
         {
+            //Instantiate(teleportEffect, currentTile.transform.GetChild(3).position, Quaternion.identity);
             currentTile.transform.GetChild(3).gameObject.SetActive(true);
+            //Instantiate(teleportEffect, tile.transform.GetChild(3).position, Quaternion.identity);
             tile.transform.GetChild(3).gameObject.SetActive(true);
         }
     }
@@ -175,6 +180,11 @@ public class TileManager : MonoBehaviour {
     public void RestartGame()
     {
         Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     private void GameStart()

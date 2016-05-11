@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
 
         guiManager = GameObject.FindObjectOfType<GUIManager>();
 
-        //TODO delete line below later
+        //TODO delete line below later, this line is used to delete all info in PlayerPrefs
         //PlayerPrefs.DeleteAll();
 	}
 	
@@ -109,6 +109,14 @@ public class Player : MonoBehaviour {
         {
             collider.gameObject.SetActive(false);
             //speed = speed * 1.25f;
+        }
+        else if (collider.tag == "RightTile")
+        {
+            dir = Vector3.right;
+        }
+        else if (collider.tag == "LeftTile")
+        {
+            dir = Vector3.left;
         }
     }
 
