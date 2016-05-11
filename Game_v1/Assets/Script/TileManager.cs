@@ -120,9 +120,9 @@ public class TileManager : MonoBehaviour {
         //add slowDown object if random generated number equal 0 of 50
         if (slowDown == 0)
         {
-            //Instantiate(teleportEffect, currentTile.transform.GetChild(2).position, Quaternion.identity);
+            Instantiate(teleportEffect, currentTile.transform.GetChild(2).position, Quaternion.identity);
             currentTile.transform.GetChild(2).gameObject.SetActive(true);
-            //Instantiate(teleportEffect, tile.transform.GetChild(2).position, Quaternion.identity);
+            Instantiate(teleportEffect, tile.transform.GetChild(2).position, Quaternion.identity);
             tile.transform.GetChild(2).gameObject.SetActive(true);
         }
 
@@ -130,9 +130,9 @@ public class TileManager : MonoBehaviour {
         //add speed up object if random generated number equal 0 of 25
         if (speedUp == 0)
         {
-            //Instantiate(teleportEffect, currentTile.transform.GetChild(3).position, Quaternion.identity);
+            Instantiate(teleportEffect, currentTile.transform.GetChild(3).position, Quaternion.identity);
             currentTile.transform.GetChild(3).gameObject.SetActive(true);
-            //Instantiate(teleportEffect, tile.transform.GetChild(3).position, Quaternion.identity);
+            Instantiate(teleportEffect, tile.transform.GetChild(3).position, Quaternion.identity);
             tile.transform.GetChild(3).gameObject.SetActive(true);
         }
     }
