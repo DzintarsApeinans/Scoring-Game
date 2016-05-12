@@ -109,9 +109,9 @@ public class TileManager : MonoBehaviour {
     {
         int teleportIndex = Random.Range(0, 2);
         int spawnScore = Random.Range(0, 10);
-        int slowDown = Random.Range(0, 25);
         int speedUp = Random.Range(0, 25);
-
+        int slowDown = Random.Range(0, 25);
+        
         //add score object if random generated number equal 0 of 10
         if (spawnScore == 0)
         {
@@ -119,14 +119,36 @@ public class TileManager : MonoBehaviour {
             tile.transform.GetChild(1).gameObject.SetActive(true);
         }
 
-        //add slowDown object if random generated number equal 0 of 25
-        if (slowDown == 0)
+        /*switch (teleportIndex)
         {
-            //Instantiate(teleportEffect, currentTile.transform.GetChild(2).position, Quaternion.identity);
-            currentTile.transform.GetChild(2).gameObject.SetActive(true);
-            //Instantiate(teleportEffect, tile.transform.GetChild(2).position, Quaternion.identity);
-            tile.transform.GetChild(2).gameObject.SetActive(true);
+            case 0:
+                {
+                    SlowDown(slowDown);
+                }
+                break;
+
+            case 1:
+                {
+                    SpeedUp(speedUp);
+                }
+                break;
+
+            default:
+                break;
+        } */
+
+        if (teleportIndex == 0)
+        {
+            SlowDown(slowDown);
         }
+        else
+        {
+            SpeedUp(speedUp);
+        }
+    }
+
+    private void SpeedUp(int speedUp)
+    {
         
         //add speed up object if random generated number equal 0 of 25
         if (speedUp == 0)
@@ -135,6 +157,18 @@ public class TileManager : MonoBehaviour {
             currentTile.transform.GetChild(3).gameObject.SetActive(true);
             //Instantiate(teleportEffect, tile.transform.GetChild(3).position, Quaternion.identity);
             tile.transform.GetChild(3).gameObject.SetActive(true);
+        }
+    }
+
+    private void SlowDown(int slowDown)
+    {
+        //add slowDown object if random generated number equal 0 of 25
+        if (slowDown == 0)
+        {
+            //Instantiate(teleportEffect, currentTile.transform.GetChild(2).position, Quaternion.identity);
+            currentTile.transform.GetChild(2).gameObject.SetActive(true);
+            //Instantiate(teleportEffect, tile.transform.GetChild(2).position, Quaternion.identity);
+            tile.transform.GetChild(2).gameObject.SetActive(true);
         }
     }
 
