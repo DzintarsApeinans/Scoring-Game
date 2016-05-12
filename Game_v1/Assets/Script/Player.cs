@@ -123,14 +123,15 @@ public class Player : MonoBehaviour {
         }
     }
 
-    /*void OnTriggerExit(Collider collider)
+    void OnTriggerExit(Collider collider)
     {
-        if (collider.tag == "Tile")
+        if (collider.tag == "Tile" || collider.tag == "LeftTile" || collider.tag == "RightTile")
         {
             RaycastHit hit;
             Ray downRay = new Ray(transform.position, -Vector3.up);
+            //Ray leftRay = new Ray(transform.position, -Vector3.left);
 
-            if (!Physics.Raycast(downRay, out hit))
+            if (!Physics.Raycast(downRay, out hit) /* || !Physics.Raycast(leftRay, out hit)*/)
             {
                 Debug.Log("Player is Dead");
                 isDead = true;
@@ -141,7 +142,7 @@ public class Player : MonoBehaviour {
                 }    
             }
         }
-    }*/
+    }
 
     private void GameStart()
     {
@@ -168,7 +169,7 @@ public class Player : MonoBehaviour {
     private bool IsGrounded()
     {
         //condition for notice if player is still on path
-        Collider[] colliders = Physics.OverlapSphere(contactPoint.position, 0.05f, whatIsGround);
+        Collider[] colliders = Physics.OverlapSphere(contactPoint.position, 0.01f, whatIsGround);
         //Vector3 halfExtents = new Vector3(0.2f, 0.25f);
         //Collider[] colliders = Physics.OverlapBox(contactPoint.position, halfExtents, Quaternion.identity, whatIsGround, QueryTriggerInteraction.UseGlobal);
         for (int i = 0; i < colliders.Length; i++)
