@@ -88,6 +88,10 @@ public class TileManager : MonoBehaviour {
 
     public void SpawnTile()
     {
+        int teleportIndex = Random.Range(0, 3);
+        int speedUp = Random.Range(0, 15);
+        int slowDown = Random.Range(0, 15);
+
         //condition for checking if there is tiles for path if not then creating new tiless
         if (leftTiles.Count == 0 || lTopTiles.Count == 0 || rightTiles.Count == 0 || rTopTiles.Count == 0)
         {
@@ -100,50 +104,34 @@ public class TileManager : MonoBehaviour {
         RightTileSpawn();  
 
         //spawning bonuses
-        Bonuses();
+        //Bonuses();
+
+        //spawning teleports
+        if (teleportIndex == 0)
+        {
+            SlowDown(slowDown);
+        }
+        if(teleportIndex == 1)
+        {
+            SpeedUp(speedUp);
+        }
+        if (teleportIndex == 2)
+        {
+            Bonuses();
+        }
  
         //currentTile =  Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
     }
 
     private void Bonuses()
     {
-        int teleportIndex = Random.Range(0, 2);
-        int spawnScore = Random.Range(0, 10);
-        int speedUp = Random.Range(0, 25);
-        int slowDown = Random.Range(0, 25);
+        int spawnScore = Random.Range(0, 5);       
         
         //add score object if random generated number equal 0 of 10
         if (spawnScore == 0)
         {
             currentTile.transform.GetChild(1).gameObject.SetActive(true);
             tile.transform.GetChild(1).gameObject.SetActive(true);
-        }
-
-        /*switch (teleportIndex)
-        {
-            case 0:
-                {
-                    SlowDown(slowDown);
-                }
-                break;
-
-            case 1:
-                {
-                    SpeedUp(speedUp);
-                }
-                break;
-
-            default:
-                break;
-        } */
-
-        if (teleportIndex == 0)
-        {
-            SlowDown(slowDown);
-        }
-        else
-        {
-            SpeedUp(speedUp);
         }
     }
 
