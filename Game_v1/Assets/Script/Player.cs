@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
     public Text[] scoreTexts;
     public LayerMask whatIsGround;
     public Transform contactPoint;
+    public Transform playerSpawnPoints;
 
     private float speed = 1.5f;    
     private int score = 0;
@@ -18,6 +19,9 @@ public class Player : MonoBehaviour {
     private bool isPause;
     private Vector3 dir;
     private GUIManager guiManager;
+    private Transform[] spawnPoints;
+    private bool reSpawn = false;
+    private bool lastToggle = false;
 
 	// Use this for initialization
 	void Start () {
@@ -31,8 +35,11 @@ public class Player : MonoBehaviour {
 
         guiManager = GameObject.FindObjectOfType<GUIManager>();
 
+        spawnPoints = playerSpawnPoints.GetComponentsInChildren<Transform>();
+
         //TODO delete line below later, this line is used to delete all info in PlayerPrefs
         //PlayerPrefs.DeleteAll();
+        Respawn();
 	}
 	
 	// Update is called once per frame
@@ -90,6 +97,12 @@ public class Player : MonoBehaviour {
         }
         transform.Translate(dir * amountToMove);
 	}
+
+    private void Respawn()
+    {
+        int i = Random.Range(1, spawnPoints.Length);
+        transform.position = spawnPoints[i].transform.position;
+    }
 
     void OnTriggerEnter(Collider collider)
     {
