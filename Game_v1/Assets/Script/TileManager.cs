@@ -103,10 +103,7 @@ public class TileManager : MonoBehaviour {
 
         RightTileSpawn();  
 
-        //spawning bonuses
-        //Bonuses();
-
-        //spawning teleports
+        //spawning teleports & bonuses
         if (teleportIndex == 0)
         {
             SlowDown(slowDown);
