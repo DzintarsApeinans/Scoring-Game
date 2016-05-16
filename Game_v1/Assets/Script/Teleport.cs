@@ -9,7 +9,7 @@ public class Teleport : MonoBehaviour {
     private Vector3 dir;
 
     void Update()
-    {
+    {//maybe bug here when sometimes can't teleport 2 times in row or maybe not bug ... 
         if (disableTimer > 0)
         {
             disableTimer -= Time.deltaTime;

@@ -102,8 +102,8 @@ public class TileManager : MonoBehaviour {
         int randomTop = Random.Range(0, 2);
 
         int teleportIndex = Random.Range(0, 3);
-        int speedUp = Random.Range(0, 15);
-        int slowDown = Random.Range(0, 15);
+        int speedUp = Random.Range(0, 10);
+        int slowDown = Random.Range(0, 10);
 
         //condition for checking if there is tiles for path if not then creating new tiless
         /*if (leftTiles.Count == 0 || lTopTiles.Count == 0 || rightTiles.Count == 0 || rTopTiles.Count == 0)
@@ -189,6 +189,14 @@ public class TileManager : MonoBehaviour {
             //tile.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
+
+    /*void OnTriggerEnter(Collider collider)
+    {
+        if (collider.tag == "Player")
+        {
+            
+        }
+    }*/
 
     private void SpeedUp(int speedUp)
     {

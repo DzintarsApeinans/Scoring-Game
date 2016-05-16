@@ -142,7 +142,7 @@ public class Player : MonoBehaviour {
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.tag == "TopTile" || collider.tag == "LeftTile" || collider.tag == "RightTile")
+        if (collider.tag == "Tile" || collider.tag == "LeftTile" || collider.tag == "RightTile")
         {
             RaycastHit hit;
             Ray downRay = new Ray(transform.position, -Vector3.up);
