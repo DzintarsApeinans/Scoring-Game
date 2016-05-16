@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     public Text[] scoreTexts;
     public LayerMask whatIsGround;
     public Transform contactPoint;
-    public Transform playerSpawnPoints;
+    //public Transform playerSpawnPoints;
 
     private float speed = 1.5f;    
     private int score = 0;
@@ -19,9 +19,9 @@ public class Player : MonoBehaviour {
     private bool isPause;
     private Vector3 dir;
     private GUIManager guiManager;
-    private Transform[] spawnPoints;
+    /*private Transform[] spawnPoints;
     private bool reSpawn = false;
-    private bool lastToggle = false;
+    private bool lastToggle = false;*/
 
 	// Use this for initialization
 	void Start () {
@@ -35,11 +35,11 @@ public class Player : MonoBehaviour {
 
         guiManager = GameObject.FindObjectOfType<GUIManager>();
 
-        spawnPoints = playerSpawnPoints.GetComponentsInChildren<Transform>();
+        //spawnPoints = playerSpawnPoints.GetComponentsInChildren<Transform>();
 
         //TODO delete line below later, this line is used to delete all info in PlayerPrefs
         //PlayerPrefs.DeleteAll();
-        Respawn();
+        //Respawn();
 	}
 	
 	// Update is called once per frame
@@ -98,11 +98,11 @@ public class Player : MonoBehaviour {
         transform.Translate(dir * amountToMove);
 	}
 
-    private void Respawn()
+    /*private void Respawn()
     {
         int i = Random.Range(1, spawnPoints.Length);
         transform.position = spawnPoints[i].transform.position;
-    }
+    }*/
 
     void OnTriggerEnter(Collider collider)
     {
@@ -134,11 +134,15 @@ public class Player : MonoBehaviour {
         {
             dir = Vector3.left;
         }
+        else if (collider.tag == "TopTile")
+        {
+            dir = Vector3.forward;
+        }
     }
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.tag == "Tile" || collider.tag == "LeftTile" || collider.tag == "RightTile")
+        if (collider.tag == "TopTile" || collider.tag == "LeftTile" || collider.tag == "RightTile")
         {
             RaycastHit hit;
             Ray downRay = new Ray(transform.position, -Vector3.up);

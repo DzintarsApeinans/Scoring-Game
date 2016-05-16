@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class TileManager : MonoBehaviour {
 
     public GameObject currentTile;
-    public GameObject tile;
     public GameObject[] tilePrefabs;
 
     private static TileManager instance;
@@ -51,9 +50,19 @@ public class TileManager : MonoBehaviour {
         }
     }
 
+    private GameObject tile;
+    private GameObject next;
+    private GameObject nextRight;
+
+    void Awake()
+    {
+        currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
+        tile = currentTile;
+    }
+
 	// Use this for initialization
 	void Start () {
-        CreateTiles(200);
+        //CreateTiles(200);
 
         GameEventManager.GameStart += GameStart;
         GameEventManager.GameOver += GameOver;
@@ -61,7 +70,7 @@ public class TileManager : MonoBehaviour {
         for (int i = 0; i < 200; i++)
         {
             SpawnTile();
-        }        
+        }
 	}
 
     public void CreateTiles(int amount)
@@ -88,34 +97,83 @@ public class TileManager : MonoBehaviour {
 
     public void SpawnTile()
     {
+        int randomLeft = Random.Range(0, 2);
+        int randomRight = Random.Range(0, 2);
+        int randomTop = Random.Range(0, 2);
+
         int teleportIndex = Random.Range(0, 3);
         int speedUp = Random.Range(0, 15);
         int slowDown = Random.Range(0, 15);
 
         //condition for checking if there is tiles for path if not then creating new tiless
-        if (leftTiles.Count == 0 || lTopTiles.Count == 0 || rightTiles.Count == 0 || rTopTiles.Count == 0)
+        /*if (leftTiles.Count == 0 || lTopTiles.Count == 0 || rightTiles.Count == 0 || rTopTiles.Count == 0)
         {
             CreateTiles(100);
-        }       
-        
-        //spawn tile
-        LeftTileSpawn();
-
-        RightTileSpawn();  
+        }*/
 
         //spawning teleports & bonuses
         if (teleportIndex == 0)
         {
             SlowDown(slowDown);
         }
-        if(teleportIndex == 1)
+        else if (teleportIndex == 1)
         {
             SpeedUp(speedUp);
         }
-        if (teleportIndex == 2)
+        else if (teleportIndex == 2)
         {
             Bonuses();
         }
+        
+        //spawning tiles
+        if (tile == currentTile)
+        {
+            Debug.Log("Left tile");
+            //spawn tiles to left or top
+            if (randomLeft == 0)
+            {
+                currentTile = Instantiate(tilePrefabs[0], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
+                tile = currentTile;
+            }
+            else if (randomLeft == 1)
+            {
+                currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                next = currentTile;
+            }
+        }
+        else if (next == currentTile)
+        {
+            Debug.Log("Top tile");
+            //spawn tiles to top with condition parameter which decide to turn right/left
+            if (randomTop == 0)
+            {
+                currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                tile = currentTile;
+            }
+            else if (randomTop == 1)
+            {
+                currentTile = Instantiate(tilePrefabs[2], currentTile.transform.GetChild(0).transform.GetChild(2).position, Quaternion.identity) as GameObject;
+                nextRight = currentTile;
+            }
+        }
+        else if (nextRight == currentTile)
+        {
+            Debug.Log("Right tile");
+            //spawn tiles to right or top
+            if (randomRight == 0)
+            {
+                currentTile = Instantiate(tilePrefabs[2], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
+                currentTile = Instantiate(tilePrefabs[2], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
+                nextRight = currentTile;
+            }
+            else if (randomRight == 1)
+            {
+                currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                tile = currentTile;
+            }
+        }  
  
         //currentTile =  Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
     }
@@ -128,7 +186,7 @@ public class TileManager : MonoBehaviour {
         if (spawnScore == 0)
         {
             currentTile.transform.GetChild(1).gameObject.SetActive(true);
-            tile.transform.GetChild(1).gameObject.SetActive(true);
+            //tile.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
 
@@ -141,7 +199,7 @@ public class TileManager : MonoBehaviour {
             //Instantiate(teleportEffect, currentTile.transform.GetChild(3).position, Quaternion.identity);
             currentTile.transform.GetChild(3).gameObject.SetActive(true);
             //Instantiate(teleportEffect, tile.transform.GetChild(3).position, Quaternion.identity);
-            tile.transform.GetChild(3).gameObject.SetActive(true);
+            //tile.transform.GetChild(3).gameObject.SetActive(true);
         }
     }
 
@@ -153,7 +211,7 @@ public class TileManager : MonoBehaviour {
             //Instantiate(teleportEffect, currentTile.transform.GetChild(2).position, Quaternion.identity);
             currentTile.transform.GetChild(2).gameObject.SetActive(true);
             //Instantiate(teleportEffect, tile.transform.GetChild(2).position, Quaternion.identity);
-            tile.transform.GetChild(2).gameObject.SetActive(true);
+            //tile.transform.GetChild(2).gameObject.SetActive(true);
         }
     }
 
