@@ -24,7 +24,7 @@ public class Teleport : MonoBehaviour {
             {
                 if (tp.code == code && tp != this && disableTimer <= 0)
                 {
-                    tp.disableTimer = 1f;
+                    tp.disableTimer = 0.25f;
 
                     Vector3 pos = tp.gameObject.transform.position;
 

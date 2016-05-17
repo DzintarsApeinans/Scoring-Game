@@ -16,9 +16,8 @@ public class Partical : MonoBehaviour {
         if (!particalSystem.isPlaying)
         {
             Destroy(gameObject);
-        }else
-
-        if (!teleportEffect.isPlaying)
+        }
+        else if (!teleportEffect.isPlaying)
         {
             teleportEffect.loop = false;
             Destroy(gameObject);

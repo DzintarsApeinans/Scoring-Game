@@ -102,7 +102,7 @@ public class TileManager : MonoBehaviour {
         int randomTop = Random.Range(0, 2);
 
         int teleportIndex = Random.Range(0, 3);
-        int speedUp = Random.Range(0, 10);
+        int speedUp = Random.Range(0, 7);
         int slowDown = Random.Range(0, 10);
 
         //condition for checking if there is tiles for path if not then creating new tiless
@@ -180,7 +180,7 @@ public class TileManager : MonoBehaviour {
 
     private void Bonuses()
     {
-        int spawnScore = Random.Range(0, 5);       
+        int spawnScore = Random.Range(0, 3);       
         
         //add score object if random generated number equal 0 of 10
         if (spawnScore == 0)
