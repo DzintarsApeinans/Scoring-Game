@@ -128,15 +128,17 @@ public class Player : MonoBehaviour {
         }
         else if (collider.tag == "RightTile")
         {
-            dir = Vector3.right;
+            if (dir == Vector3.left)
+            {
+                dir = Vector3.right;
+            }   
         }
         else if (collider.tag == "LeftTile")
         {
-            dir = Vector3.left;
-        }
-        else if (collider.tag == "TopTile")
-        {
-            dir = Vector3.forward;
+            if (dir == Vector3.right)
+            {
+                dir = Vector3.left;
+            }    
         }
     }
 
