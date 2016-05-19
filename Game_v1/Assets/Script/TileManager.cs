@@ -138,7 +138,7 @@ public class TileManager : MonoBehaviour {
             else if (randomLeft == 1)
             {
                 currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
-                currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                //currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
                 next = currentTile;
             }
         }
@@ -153,7 +153,7 @@ public class TileManager : MonoBehaviour {
             }
             else if (randomTop == 1)
             {
-                currentTile = Instantiate(tilePrefabs[2], currentTile.transform.GetChild(0).transform.GetChild(2).position, Quaternion.identity) as GameObject;
+                currentTile = Instantiate(tilePrefabs[3], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
                 nextRight = currentTile;
             }
         }

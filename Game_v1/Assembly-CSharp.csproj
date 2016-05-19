@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\CameraScript.cs" />
      <Compile Include="Assets\Script\GUIManager.cs" />
      <Compile Include="Assets\Script\GameEventManager.cs" />
      <Compile Include="Assets\Script\Partical.cs" />
@@ -53,6 +54,7 @@
      <Compile Include="Assets\Script\Teleport.cs" />
      <Compile Include="Assets\Script\Tile.cs" />
      <Compile Include="Assets\Script\TileManager.cs" />
+     <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
