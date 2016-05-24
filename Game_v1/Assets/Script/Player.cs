@@ -67,7 +67,7 @@ public class Player : MonoBehaviour {
         } 
         else
         //moving left condition
-	    if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetMouseButtonDown(0) && !isDead && !isPause)
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && !isDead && !isPause || Input.GetMouseButtonDown(0) && !isDead && !isPause)
         {
             isPlaying = true;
             score++;
@@ -81,7 +81,7 @@ public class Player : MonoBehaviour {
                 dir = Vector3.forward;
             }
         }//moving right condition
-        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetMouseButtonDown(1) && !isDead && !isPause)
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && !isDead && !isPause || Input.GetMouseButtonDown(1) && !isDead && !isPause)
         {
             isPlaying = true;
             score++;

@@ -58,7 +58,7 @@ public class GUIManager : MonoBehaviour {
     }
 
     private void GameOver()
-    {
+    {      
         player.GameOver();
         enabled = true;
     }
