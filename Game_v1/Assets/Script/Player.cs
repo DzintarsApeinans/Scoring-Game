@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
         speed += Time.deltaTime;
 
         //player dead condition
-        if (!IsGrounded() && isPlaying)
+       /* if (!IsGrounded() && isPlaying)
         {
             isDead = true;
             GameOver();
@@ -58,12 +58,13 @@ public class Player : MonoBehaviour {
                 transform.GetChild(0).transform.parent = null;
             }
             GameEventManager.TriggerGameOver();
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
             isPause = TogglePause();
             guiManager.pauseText.enabled = false;
+            guiManager.gamePause.enabled = false;
         } 
         else
         //moving left condition
@@ -144,15 +145,14 @@ public class Player : MonoBehaviour {
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.tag == "Tile" || collider.tag == "LeftTile" || collider.tag == "RightTile")
+        if (collider.tag == "Tile" || collider.tag == "LeftTile" || collider.tag == "RightTile" || collider.tag == "TopTile")
         {
             RaycastHit hit;
             Ray downRay = new Ray(transform.position, -Vector3.up);
-            //Ray leftRay = new Ray(transform.position, -Vector3.left);
 
-            if (!Physics.Raycast(downRay, out hit) /* || !Physics.Raycast(leftRay, out hit)*/)
+            if (!Physics.Raycast(downRay, out hit))
             {
-                Debug.Log("Player is Dead");
+                //Debug.Log("Player is Dead");
                 isDead = true;
                 GameOver();
                 if (transform.childCount > 0)
@@ -212,6 +212,7 @@ public class Player : MonoBehaviour {
         if (isPause)
         {
             guiManager.pauseText.enabled = true;
+            guiManager.gamePause.enabled = true;
         }
     }
 

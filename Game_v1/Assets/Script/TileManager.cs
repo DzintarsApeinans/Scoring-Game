@@ -102,8 +102,8 @@ public class TileManager : MonoBehaviour {
         int randomTop = Random.Range(0, 2);
 
         int teleportIndex = Random.Range(0, 3);
-        int speedUp = Random.Range(0, 7);
-        int slowDown = Random.Range(0, 10);
+        int speedUp = Random.Range(0, 25);
+        int slowDown = Random.Range(0, 20);
 
         //condition for checking if there is tiles for path if not then creating new tiless
         /*if (leftTiles.Count == 0 || lTopTiles.Count == 0 || rightTiles.Count == 0 || rTopTiles.Count == 0)
@@ -112,7 +112,7 @@ public class TileManager : MonoBehaviour {
         }*/
 
         //spawning teleports & bonuses
-        if (teleportIndex == 0)
+        /*if (teleportIndex == 0)
         {
             SlowDown(slowDown);
         }
@@ -123,7 +123,8 @@ public class TileManager : MonoBehaviour {
         else if (teleportIndex == 2)
         {
             Bonuses();
-        }
+        }*/
+        Bonuses();
         
         //spawning tiles
         if (tile == currentTile)
@@ -180,14 +181,47 @@ public class TileManager : MonoBehaviour {
 
     private void Bonuses()
     {
-        int spawnScore = Random.Range(0, 3);       
-        
+        /*
+        int spawnScore = Random.Range(0, 7);    
         //add score object if random generated number equal 0 of 10
         if (spawnScore == 0)
         {
             currentTile.transform.GetChild(1).gameObject.SetActive(true);
             //tile.transform.GetChild(1).gameObject.SetActive(true);
+        }*/
+
+        int spawnIndex = Random.Range(0, 3);
+
+        if (spawnIndex == 0)
+        {
+            int spawnScore = Random.Range(0, 7);
+            //add score object if random generated number equal 0 of 7
+            if (spawnScore == 0)
+            {
+                currentTile.transform.GetChild(1).gameObject.SetActive(true);
+                //tile.transform.GetChild(1).gameObject.SetActive(true);
+            }
         }
+        else if (spawnIndex == 1)
+        {
+            int slowDown = Random.Range(0, 25);
+            //add slowDown object if random generated number equal 0 of 25
+            if (slowDown == 0)
+            {
+                currentTile.transform.GetChild(2).gameObject.SetActive(true);
+                //tile.transform.GetChild(2).gameObject.SetActive(true);
+            }
+        }
+        else if (spawnIndex == 2)
+        {
+            int speedUp = Random.Range(0, 20);
+            //add speed up object if random generated number equal 0 of 20
+            if (speedUp == 0)
+            {
+                currentTile.transform.GetChild(3).gameObject.SetActive(true);
+                //tile.transform.GetChild(3).gameObject.SetActive(true);
+            }
+        }     
     }
 
     /*void OnTriggerEnter(Collider collider)

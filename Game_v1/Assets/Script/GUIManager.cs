@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GUIManager : MonoBehaviour {
 
     public GUIText gameStartText, toStartText, instructionsText, pauseText;
+    public GUITexture background;
+
+    public Text gameName, gamePause, gameInstruction, toStart;
+    public Image gameBackground;
 
     private Player player;
     private bool muteToggle = false;
@@ -17,6 +22,7 @@ public class GUIManager : MonoBehaviour {
 
         player = GameObject.FindObjectOfType<Player>();
         pauseText.enabled = false;
+        gamePause.enabled = false;
 	}
 
 	// Update is called once per frame
@@ -51,15 +57,25 @@ public class GUIManager : MonoBehaviour {
 
     private void GameStart()
     {        
+        //GUI
         gameStartText.enabled = false;
         toStartText.enabled = false;
-        instructionsText.enabled = false;        
+        instructionsText.enabled = false;
+        background.enabled = false;
+
+        //UI Canvas
+        gameName.enabled = false;
+        gameInstruction.enabled = false;
+        toStart.enabled = false;
+        gameBackground.enabled = false;
         //enabled = false;
     }
 
     private void GameOver()
     {      
         player.GameOver();
+        muteToggle = false;
+        ToggleMute();
         enabled = true;
     }
 
