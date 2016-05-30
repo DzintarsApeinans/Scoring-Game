@@ -5,8 +5,6 @@ public class CameraScript : MonoBehaviour {
 
     Transform playerTransform;
 
-    Vector3 cameraOrientationVector = new Vector3(0, 15, -10f);
-
     private Transform player; 
     private Vector3 relCameraPos;
 
@@ -18,7 +16,7 @@ public class CameraScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //playerTransform = GameObject.Find("Player").transform;
+
 	}
 	
 	// Update is called once per frame
@@ -28,6 +26,6 @@ public class CameraScript : MonoBehaviour {
 
     void LateUpdate()
     {
-        //transform.position = playerTransform.position + cameraOrientationVector;
+
     } 
 }

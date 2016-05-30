@@ -4,6 +4,12 @@ using System.Collections;
 public class Tile : MonoBehaviour {
 
     private float fallDelay = 1.5f;
+    private Renderer renderer;
+
+    void Start()
+    {
+        renderer = GetComponentInChildren<Renderer>();
+    }
 
     void OnTriggerExit(Collider collider)
     {
@@ -12,6 +18,7 @@ public class Tile : MonoBehaviour {
         {
             TileManager.Instance.SpawnTile();
             //StartCoroutine(FallDown());
+            StartCoroutine(ChangeTileColor());
         }
     }
 
@@ -19,8 +26,7 @@ public class Tile : MonoBehaviour {
     {
         if (collider.tag == "Player")
         {
-            Debug.Log("change color");
-            //transform.GetChild(0).transform.renderer.material.color = Color.yellow;
+            renderer.material.color = Color.yellow;            
         }
     }
 
@@ -61,5 +67,11 @@ public class Tile : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    IEnumerator ChangeTileColor()
+    {
+        yield return new WaitForSeconds(1.7f);
+        renderer.material.color = Color.gray;
     }
 }
