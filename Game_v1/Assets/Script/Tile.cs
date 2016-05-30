@@ -4,7 +4,8 @@ using System.Collections;
 public class Tile : MonoBehaviour {
 
     private float fallDelay = 1.5f;
-    private Renderer renderer;
+
+    public Renderer renderer;
 
     void Start()
     {
@@ -71,7 +72,7 @@ public class Tile : MonoBehaviour {
 
     IEnumerator ChangeTileColor()
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(2.0f);
         renderer.material.color = Color.gray;
     }
 }
