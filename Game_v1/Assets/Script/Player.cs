@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
         speed += Time.deltaTime;
 
         //player dead condition
-       /* if (!IsGrounded() && isPlaying)
+        if (!IsGrounded() && isPlaying)
         {
             isDead = true;
             GameOver();
@@ -57,8 +57,9 @@ public class Player : MonoBehaviour {
             {
                 transform.GetChild(0).transform.parent = null;
             }
+            gameObject.SetActive(false);
             GameEventManager.TriggerGameOver();
-        }*/
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
@@ -147,7 +148,7 @@ public class Player : MonoBehaviour {
     {
         if (collider.tag == "Tile" || collider.tag == "LeftTile" || collider.tag == "RightTile" || collider.tag == "TopTile")
         {
-            RaycastHit hit;
+            /*RaycastHit hit;
             Ray downRay = new Ray(transform.position, -Vector3.up);
 
             if (!Physics.Raycast(downRay, out hit))
@@ -159,7 +160,7 @@ public class Player : MonoBehaviour {
                 {
                     transform.GetChild(0).transform.parent = null;
                 }    
-            }
+            }*/
         }
     }
 

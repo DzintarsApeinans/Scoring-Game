@@ -19,8 +19,8 @@ public class Tile : MonoBehaviour {
     {
         if (collider.tag == "Player")
         {
-            TileManager.Instance.SpawnTile();
-            //StartCoroutine(FallDown());
+            Debug.Log("change color");
+            //transform.GetChild(0).transform.renderer.material.color = Color.yellow;
         }
     }
 
