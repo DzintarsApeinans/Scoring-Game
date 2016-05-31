@@ -21,6 +21,7 @@ public class GUIManager : MonoBehaviour {
         GameEventManager.GameOver += GameOver;
 
         player = GameObject.FindObjectOfType<Player>();
+
         pauseText.enabled = false;
         gamePause.enabled = false;
 	}
@@ -68,6 +69,7 @@ public class GUIManager : MonoBehaviour {
         gameInstruction.enabled = false;
         toStart.enabled = false;
         gameBackground.enabled = false;
+
         //enabled = false;
     }
 

@@ -23,9 +23,4 @@ public class CameraScript : MonoBehaviour {
 	void Update () {
         transform.position = player.position - relCameraPos;
 	}
-
-    void LateUpdate()
-    {
-
-    } 
 }

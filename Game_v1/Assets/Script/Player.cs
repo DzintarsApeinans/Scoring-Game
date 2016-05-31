@@ -10,7 +10,6 @@ public class Player : MonoBehaviour {
     public Text[] scoreTexts;
     public LayerMask whatIsGround;
     public Transform contactPoint;
-    //public Transform playerSpawnPoints;
 
     private float speed = 1.5f;    
     private int score = 0;
@@ -19,9 +18,6 @@ public class Player : MonoBehaviour {
     private bool isPause;
     private Vector3 dir;
     private GUIManager guiManager;
-    /*private Transform[] spawnPoints;
-    private bool reSpawn = false;
-    private bool lastToggle = false;*/
 
 	// Use this for initialization
 	void Start () {
@@ -35,11 +31,8 @@ public class Player : MonoBehaviour {
 
         guiManager = GameObject.FindObjectOfType<GUIManager>();
 
-        //spawnPoints = playerSpawnPoints.GetComponentsInChildren<Transform>();
-
         //TODO delete line below later, this line is used to delete all info in PlayerPrefs
         //PlayerPrefs.DeleteAll();
-        //Respawn();
 	}
 	
 	// Update is called once per frame
@@ -61,6 +54,7 @@ public class Player : MonoBehaviour {
             GameEventManager.TriggerGameOver();
         }
 
+        //pause condition
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
             isPause = TogglePause();
@@ -77,6 +71,7 @@ public class Player : MonoBehaviour {
             if(dir == Vector3.forward)
             {
                 dir = Vector3.left;
+
             }
             else
             {
@@ -100,12 +95,6 @@ public class Player : MonoBehaviour {
         transform.Translate(dir * amountToMove);
 	}
 
-    /*private void Respawn()
-    {
-        int i = Random.Range(1, spawnPoints.Length);
-        transform.position = spawnPoints[i].transform.position;
-    }*/
-
     void OnTriggerEnter(Collider collider)
     {
         //scoring condition
@@ -127,7 +116,7 @@ public class Player : MonoBehaviour {
             collider.gameObject.SetActive(false);
             Instantiate(teleportEffect, transform.position, Quaternion.identity);
             speed = speed + 0.5f;
-        }
+        }//direction validation after teleport
         else if (collider.tag == "RightTile")
         {
             if (dir == Vector3.left)
@@ -144,11 +133,11 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit(Collider collider)
+    /*void OnTriggerExit(Collider collider)
     {
         if (collider.tag == "Tile" || collider.tag == "LeftTile" || collider.tag == "RightTile" || collider.tag == "TopTile")
         {
-            /*RaycastHit hit;
+            RaycastHit hit;
             Ray downRay = new Ray(transform.position, -Vector3.up);
 
             if (!Physics.Raycast(downRay, out hit))
@@ -160,9 +149,9 @@ public class Player : MonoBehaviour {
                 {
                     transform.GetChild(0).transform.parent = null;
                 }    
-            }*/
+            }
         }
-    }
+    }*/
 
     private void GameStart()
     {
@@ -190,8 +179,6 @@ public class Player : MonoBehaviour {
     {
         //condition for notice if player is still on path
         Collider[] colliders = Physics.OverlapSphere(contactPoint.position, 0.01f, whatIsGround);
-        //Vector3 halfExtents = new Vector3(0.2f, 0.25f);
-        //Collider[] colliders = Physics.OverlapBox(contactPoint.position, halfExtents, Quaternion.identity, whatIsGround, QueryTriggerInteraction.UseGlobal);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)

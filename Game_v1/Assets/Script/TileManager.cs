@@ -68,7 +68,7 @@ public class TileManager : MonoBehaviour {
         GameEventManager.GameStart += GameStart;
         GameEventManager.GameOver += GameOver;
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 150; i++)
         {
             SpawnTile();
         }
@@ -98,13 +98,18 @@ public class TileManager : MonoBehaviour {
 
     public void SpawnTile()
     {
+        //tile spawn random variables
         int randomLeft = Random.Range(0, 2);
         int randomRight = Random.Range(0, 2);
         int randomTop = Random.Range(0, 2);
 
-        int teleportIndex = Random.Range(0, 2);
+        //collectable object spawn random variable
+        int teleportIndex = Random.Range(0, 3);
+
+        //bonuses, teleport spawn random variables
         int speedUp = Random.Range(0, 10);
         int slowDown = Random.Range(0, 15);
+        int bonusScore = Random.Range(0, 7);
 
         //condition for checking if there is tiles for path if not then creating new tiless
         /*if (leftTiles.Count == 0 || lTopTiles.Count == 0 || rightTiles.Count == 0 || rTopTiles.Count == 0)
@@ -112,7 +117,7 @@ public class TileManager : MonoBehaviour {
             CreateTiles(100);
         }*/
         
-        //spawning tiles
+        //spawning tiles with teleports and bonus score object
         if (tile == currentTile)
         {
             //spawn tiles to left or top
@@ -121,6 +126,10 @@ public class TileManager : MonoBehaviour {
                 currentTile = Instantiate(tilePrefabs[0], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
 
                 if (teleportIndex == 0)
+                {
+                    BonusScore(bonusScore);
+                }
+                else if (teleportIndex == 1)
                 {
                     currentTile = Instantiate(tilePrefabs[0], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     SlowDown(slowDown);
@@ -131,7 +140,7 @@ public class TileManager : MonoBehaviour {
                         currentTile = Instantiate(tilePrefabs[0], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     }
                 }
-                else if (teleportIndex == 1)
+                else if (teleportIndex == 2)
                 {
                     currentTile = Instantiate(tilePrefabs[0], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     SpeedUp(speedUp);
@@ -151,6 +160,10 @@ public class TileManager : MonoBehaviour {
 
                 if (teleportIndex == 0)
                 {
+                    BonusScore(bonusScore);
+                }
+                else if (teleportIndex == 1)
+                {
                     currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     SlowDown(slowDown);
 
@@ -159,7 +172,7 @@ public class TileManager : MonoBehaviour {
                         currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     }
                 }
-                else if (teleportIndex == 1)
+                else if (teleportIndex == 2)
                 {
                     currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     SpeedUp(speedUp);
@@ -198,6 +211,10 @@ public class TileManager : MonoBehaviour {
 
                 if (teleportIndex == 0)
                 {
+                    BonusScore(bonusScore);
+                }
+                else if (teleportIndex == 1)
+                {
                     currentTile = Instantiate(tilePrefabs[2], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     SlowDown(slowDown);
 
@@ -207,7 +224,7 @@ public class TileManager : MonoBehaviour {
                         currentTile = Instantiate(tilePrefabs[2], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     }
                 }
-                else if (teleportIndex == 1)
+                else if (teleportIndex == 2)
                 {
                     currentTile = Instantiate(tilePrefabs[2], currentTile.transform.GetChild(0).transform.GetChild(0).position, Quaternion.identity) as GameObject;
                     SpeedUp(speedUp);
@@ -228,6 +245,11 @@ public class TileManager : MonoBehaviour {
                 if (teleportIndex == 0)
                 {
                     currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
+                    BonusScore(bonusScore);
+                }
+                else if (teleportIndex == 1)
+                {
+                    currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     SlowDown(slowDown);
 
                     if (currentTile.transform.GetChild(2).gameObject.activeInHierarchy)
@@ -236,7 +258,7 @@ public class TileManager : MonoBehaviour {
                         currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     }
                 }
-                else if (teleportIndex == 1)
+                else if (teleportIndex == 2)
                 {
                     currentTile = Instantiate(tilePrefabs[1], currentTile.transform.GetChild(0).transform.GetChild(1).position, Quaternion.identity) as GameObject;
                     SpeedUp(speedUp);
@@ -251,48 +273,32 @@ public class TileManager : MonoBehaviour {
                 tile = currentTile;
             }
         }
-
-        //spawning teleports & bonuses
-        Bonuses();
     }
 
-    private void Bonuses()
+    private void BonusScore(int bonuses)
     {
-        int spawnIndex = Random.Range(0, 3);
-
-        if (spawnIndex == 0)
+        //add bonuses object to play field
+        if (bonuses == 0)
         {
-            int spawnScore = Random.Range(0, 7);
-            //add score object if random generated number equal 0 of 7
-            if (spawnScore == 0)
-            {
-                currentTile.transform.GetChild(1).gameObject.SetActive(true);
-            }
-        }  
+            currentTile.transform.GetChild(1).gameObject.SetActive(true);
+        }
     }
 
     private void SpeedUp(int speedUp)
-    {
-        
-        //add speed up object if random generated number equal 0 of 25
+    {        
+        //add speed up object to play field
         if (speedUp == 0)
         {
-            //Instantiate(teleportEffect, currentTile.transform.GetChild(3).position, Quaternion.identity);
             currentTile.transform.GetChild(3).gameObject.SetActive(true);
-            //Instantiate(teleportEffect, tile.transform.GetChild(3).position, Quaternion.identity);
-            //tile.transform.GetChild(3).gameObject.SetActive(true);
         }
     }
 
     private void SlowDown(int slowDown)
     {
-        //add slowDown object if random generated number equal 0 of 25
+        //add slow down object to play field
         if (slowDown == 0)
         {
-            //Instantiate(teleportEffect, currentTile.transform.GetChild(2).position, Quaternion.identity);
             currentTile.transform.GetChild(2).gameObject.SetActive(true);
-            //Instantiate(teleportEffect, tile.transform.GetChild(2).position, Quaternion.identity);
-            //tile.transform.GetChild(2).gameObject.SetActive(true);
         }
     }
 
@@ -338,7 +344,6 @@ public class TileManager : MonoBehaviour {
 
     public void RestartGame()
     {
-        //Application.LoadLevel(Application.loadedLevel);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
