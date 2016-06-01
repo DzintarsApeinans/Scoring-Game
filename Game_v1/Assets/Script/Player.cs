@@ -119,17 +119,24 @@ public class Player : MonoBehaviour {
         }//direction validation after teleport
         else if (collider.tag == "RightTile")
         {
-            if (dir == Vector3.left)
+            if (dir == Vector3.left || dir == Vector3.forward)
             {
                 dir = Vector3.right;
-            }   
+            }
         }
         else if (collider.tag == "LeftTile")
         {
-            if (dir == Vector3.right)
+            if (dir == Vector3.right || dir == Vector3.forward) //3.333333
             {
                 dir = Vector3.left;
-            }    
+            }
+        }
+        else if (collider.tag == "TopTile")
+        {
+            if (dir == Vector3.left || dir == Vector3.right)
+            {
+                dir = Vector3.forward;
+            }
         }
     }
 

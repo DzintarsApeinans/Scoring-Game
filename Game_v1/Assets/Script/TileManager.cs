@@ -274,7 +274,7 @@ public class TileManager : MonoBehaviour {
             }
         }
     }
-
+    
     private void BonusScore(int bonuses)
     {
         //add bonuses object to play field

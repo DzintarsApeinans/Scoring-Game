@@ -17,9 +17,9 @@ public class Tile : MonoBehaviour {
         //condition for tile falldown and spawning next amount of tiles(path) when player enter tile
         if (collider.tag == "Player")
         {
-            TileManager.Instance.SpawnTile();
-            //StartCoroutine(FallDown());
+            TileManager.Instance.SpawnTile();            
             StartCoroutine(ChangeTileColor());
+            StartCoroutine(FallDown());
         }
     }
 
@@ -27,7 +27,8 @@ public class Tile : MonoBehaviour {
     {
         if (collider.tag == "Player")
         {
-            renderer.material.color = Color.yellow;            
+            renderer.material.color = Color.yellow;
+            TileManager.Instance.SpawnTile();
         }
     }
 
@@ -41,28 +42,32 @@ public class Tile : MonoBehaviour {
         //"case of" condition for deciding which tiles push in correct stack, disable it and set rigidbody isKinematic to true
         switch (gameObject.name)
         {
-            case "LeftTile":
+            case "LeftTile(Clone)":
                 TileManager.Instance.LeftTiles.Push(gameObject);
                 gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 gameObject.SetActive(false);
+                Destroy(gameObject);
                 break;
 
-            case "LTopTile":
+            case "LTopTile(Clone)":
                 TileManager.Instance.LTopTiles.Push(gameObject);
                 gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 gameObject.SetActive(false);
+                Destroy(gameObject);
                 break;
 
-            case "RightTile":
+            case "RightTile(Clone)":
                 TileManager.Instance.RightTiles.Push(gameObject);
                 gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 gameObject.SetActive(false);
+                Destroy(gameObject);
                 break;
 
-            case "RTopTile":
+            case "RTopTile(Clone)":
                 TileManager.Instance.RTopTiles.Push(gameObject);
                 gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 gameObject.SetActive(false);
+                Destroy(gameObject);
                 break;
 
             default:
