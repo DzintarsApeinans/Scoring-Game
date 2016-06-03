@@ -38,6 +38,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float amountToMove = speed * Time.deltaTime;
+
         //increasing object(player) speed each frame
         speed += Time.deltaTime;
 
@@ -108,7 +109,7 @@ public class Player : MonoBehaviour {
         else if (collider.tag == "Slow")
         {
             collider.gameObject.SetActive(false);
-            speed = speed / 2f;
+            speed = speed / 1.25f;
             Instantiate(teleportEffect, transform.position, Quaternion.identity);
         }//speed up condition
         else if (collider.tag == "SpeedUp")

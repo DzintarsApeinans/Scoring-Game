@@ -108,7 +108,7 @@ public class TileManager : MonoBehaviour {
 
         //bonuses, teleport spawn random variables
         int speedUp = Random.Range(0, 10);
-        int slowDown = Random.Range(0, 15);
+        int slowDown = Random.Range(0, 20);
         int bonusScore = Random.Range(0, 7);
 
         //condition for checking if there is tiles for path if not then creating new tiless
@@ -116,8 +116,8 @@ public class TileManager : MonoBehaviour {
         {
             CreateTiles(100);
         }*/
-        
-        //spawning tiles with teleports and bonus score object
+
+        //spawning tiles with teleports and bonus score object 
         if (tile == currentTile)
         {
             //spawn tiles to left or top
